@@ -4,18 +4,37 @@ const playerFactory = (name, playingAs) => {
 }
 
 const players = (() => {
+    //Choosing between playing against the computer or two player.
+    let gameType = ''
+    const computerOpponent = document.querySelector('.computerOpponent');
+    computerOpponent.addEventListener('click', () => {
+        gameType = 'vs computer';
+    });
+    const twoPlayer = document.querySelector('.twoPlayer');
+    twoPlayer.addEventListener('click', () => {
+        gameType = 'two player';
+    });
+
+    //Setting up players.
+    let player1 = playerFactory('', 'o');
+    let player2 = playerFactory('', 'x');
     const player1Input = document.getElementById('player1input');
     const player2Input = document.getElementById('player2input');
     const startGame =  document.querySelector('.startGame');
     const player1Title = document.querySelector('.playerOne');
     const player2Title = document.querySelector('.playerTwo');
-    let player1 = playerFactory('', 'o');
-    let player2 = playerFactory('', 'x');
     startGame.addEventListener('click', () => {
-        player1.name = player1Input.value;
-        player1Title.textContent = player1Input.value;
-        player2.name = player2Input.value;
-        player2Title.textContent = player2Input.value;
+        if(gameType === 'twoplayer'){
+            player1.name = player1Input.value;
+            player1Title.textContent = player1Input.value;
+            player2.name = player2Input.value;
+            player2Title.textContent = player2Input.value;
+        } else if (gameType === 'vs computer'){
+            player1.name = player1Input.value;
+            player1Title.textContent = player1Input.value;
+            player2.name = 'Computer';
+            player2Title.textContent = 'Computer';
+        }
     })
     return {player1, player2}
 })();
@@ -67,19 +86,35 @@ const gameLogic = (() => {
         };
     }    
     
+    const computerTurn = () => {
+        let cell = Math.floor(Math.random() * 9);
+        let playCell;
+
+        if(gameBoard.boardValues[cell] === ''){
+            playCell = document.querySelector(`[data-index = "${cell}"]`);
+        } else {
+           return computerTurn();
+        }
+        
+        return playCell;
+    }
+
     const takeTurn = (targetCell) => {
         if(!playingGame || gameBoard.boardValues[targetCell.dataset.index] !== '') return;
         if(turn === players.player1){
-            gameBoard.boardValues[targetCell.dataset.index] = players.player1.playingAs;
+            gameBoard.boardValues[targetCell.dataset.index] = turn.playingAs;
+            gameBoard.populateBoard();
             checkWin(playingGame);
             turn = players.player2;
+            if(turn.name = 'Computer') {
+                takeTurn(computerTurn());
+            }
         } else {
-            gameBoard.boardValues[targetCell.dataset.index] = players.player2.playingAs;
+            gameBoard.boardValues[targetCell.dataset.index] = turn.playingAs;
+            gameBoard.populateBoard();
             checkWin(playingGame);
             turn = players.player1;
         }
-
-        gameBoard.populateBoard();
     };
 
     playAgain.addEventListener('click', () => {
