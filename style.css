@@ -1,0 +1,36 @@
+body {
+    background-color: rgba(129, 139, 148, 0.308);
+}
+
+h1 {
+    margin-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 88px;
+    font-weight: 800;
+    color: rgb(255, 165, 29);
+    text-shadow: 5px 4px rgb(29, 150, 255);
+    text-align: center;
+}
+
+
+.gameContainer {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+table {
+    border-spacing: 5px;
+    border-collapse: separate;
+}
+
+td {
+    height: 100px;
+    width: 100px;
+    background-color: rgb(29, 150, 255);
+    color: rgb(255, 165, 29);
+    text-align: center;
+    line-height: 100px;
+    font-size: 100px;
+    font-weight: 700;
+    font-family: sans-serif;
+}
