@@ -12,15 +12,47 @@ h1 {
     text-align: center;
 }
 
-
+/*All the parts to do with the game.*/
 .gameContainer {
     width: fit-content;
     margin: 0 auto;
 }
 
+/*User inputs to select game type and start game.*/
+.gameType {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.playerInput {
+    width: fit-content;
+    margin: 10px auto;
+}
+
+.playerInput input {
+    margin-left: 5px;
+}
+
+.playerInput input:focus-visible {
+    outline: none;
+}
+
+.startGame{
+    display: block;
+    margin: 0 auto;
+}
+
+.playAgain {
+    display: block;
+    margin: 0 auto;
+}
+/*The game board.*/
 table {
     border-spacing: 5px;
     border-collapse: separate;
+    margin: 0 auto;
 }
 
 td {

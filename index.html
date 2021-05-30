@@ -10,9 +10,16 @@
         <h1>Tic-Tac-Toe</h1>
 
         <section class="gameContainer">
-          <button class="computerOpponent">Vs. Computer</button><button class="twoPlayer">Two Player</button>
-          <label for="player1Input">Player 1:</label><input type="text" name="player1input" id="player1input">
-          <label for="player2Input">Player 2:</label><input type="text" name="player2input" id="player2input">
+          <div class="gameType">
+            <button class="computerOpponent">Vs. Computer</button>
+            <button class="twoPlayer">Two Player</button>
+          </div>
+          <div class="playerInput">
+            <label for="player1Input">Player 1:</label><input type="text" name="player1input" id="player1input">
+          </div>
+          <div class="playerInput">
+            <label for="player2Input">Player 2:</label><input type="text" name="player2input" id="player2input">
+          </div>
           <button class="startGame">Start Game</button>
           <p class="playerOne"></p>
           <table>
