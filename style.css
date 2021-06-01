@@ -20,10 +20,8 @@ h1 {
 
 /*User inputs to select game type and start game.*/
 .gameType {
-    width: 80%;
+    width: fit-content;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
 }
 
 .playerInput {
@@ -48,6 +46,19 @@ h1 {
     display: block;
     margin: 0 auto;
 }
+
+.topVisible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.bottomVisible {
+    display: block;
+}
+
 /*The game board.*/
 table {
     border-spacing: 5px;

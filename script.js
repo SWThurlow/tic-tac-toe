@@ -4,36 +4,70 @@ const playerFactory = (name, playingAs) => {
 }
 
 const players = (() => {
+    const gameChoice = document.querySelector('.gameType');
+    const textInputs = document.querySelectorAll('.playerInput');
+    const player1Input = document.getElementById('player1input');
+    const player2Input = document.getElementById('player2input');
+    const startGame =  document.querySelector('.startGame');
+
     //Choosing between playing against the computer or two player.
     let gameType = ''
-    const computerOpponent = document.querySelector('.computerOpponent');
-    computerOpponent.addEventListener('click', () => {
-        gameType = 'vs computer';
-    });
-    const twoPlayer = document.querySelector('.twoPlayer');
-    twoPlayer.addEventListener('click', () => {
-        gameType = 'two player';
+    gameChoice.addEventListener('click', (e) => {
+        if(e.target.dataset.type === 'vsComputer'){
+            //Setting game type.
+            gameType = 'vsComputer';
+            //Adding/removing classes for animation.
+            gameChoice.classList.add('hidden');
+            gameChoice.classList.remove('topVisible');
+            textInputs[0].classList.remove('hidden');
+            textInputs[0].classList.add('topVisible');
+            startGame.classList.remove('hidden');
+            startGame.classList.add('topVisible');           
+        } else if(e.target.dataset.type === 'twoPlayer'){
+            //Setting game type.
+            gameType = 'twoPlayer';
+            //Adding/removing classes for animation.
+            gameChoice.classList.add('hidden');
+            gameChoice.classList.remove('topVisible');
+            textInputs.forEach(input => {
+                input.classList.remove('hidden');
+                input.classList.add('topVisible');
+            });
+            startGame.classList.remove('hidden');
+            startGame.classList.add('topVisible');
+        }
     });
 
     //Setting up players.
     let player1 = playerFactory('', 'o');
     let player2 = playerFactory('', 'x');
-    const player1Input = document.getElementById('player1input');
-    const player2Input = document.getElementById('player2input');
-    const startGame =  document.querySelector('.startGame');
     const player1Title = document.querySelector('.playerOne');
     const player2Title = document.querySelector('.playerTwo');
     startGame.addEventListener('click', () => {
-        if(gameType === 'twoplayer'){
+        if(gameType === 'twoPlayer'){
             player1.name = player1Input.value;
             player1Title.textContent = player1Input.value;
             player2.name = player2Input.value;
             player2Title.textContent = player2Input.value;
-        } else if (gameType === 'vs computer'){
+
+            //Changing classes to hide user inputs while playing.
+            textInputs.forEach(input => {
+                input.classList.add('hidden');
+                input.classList.remove('topVisible');
+            });
+            startGame.classList.add('hidden');
+            startGame.classList.remove('topVisible');
+        } else if (gameType === 'vsComputer'){
             player1.name = player1Input.value;
             player1Title.textContent = player1Input.value;
             player2.name = 'Computer';
             player2Title.textContent = 'Computer';
+
+            //Changing classes to hide user inputs while playing.
+            textInputs[0].classList.add('hidden');
+            textInputs[0].classList.remove('topVisible');
+            startGame.classList.add('hidden');
+            startGame.classList.remove('topVisible');
         }
     })
     return {player1, player2}
