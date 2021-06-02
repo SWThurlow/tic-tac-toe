@@ -87,6 +87,8 @@ const gameBoard = (()=> {
  
 const gameLogic = (() => {
     let turn = players.player1;
+    let turnsTaken = 0;
+    let draws = 0
     let playingGame = true;
     const endMsg = document.querySelector('.endGameMsg');
     let playAgain = document.querySelector('.playAgain');
@@ -117,6 +119,15 @@ const gameLogic = (() => {
             turn.wins++
             endMsg.textContent = `${turn.name} Wins!`;
             playingGame = false;
+            playAgain.classList.remove('hidden');
+            playAgain.classList.add('bottomVisible');
+        } 
+        if(turnsTaken === 9){
+            endMsg.textContent = `It's a draw.`;
+            playingGame = false;
+            draws++;
+            playAgain.classList.remove('hidden');
+            playAgain.classList.add('bottomVisible');
         };
     }    
     
@@ -136,6 +147,7 @@ const gameLogic = (() => {
     const takeTurn = (targetCell) => {
         if(!playingGame || gameBoard.boardValues[targetCell.dataset.index] !== '') return;
         if(turn === players.player1){
+            turnsTaken++;
             gameBoard.boardValues[targetCell.dataset.index] = turn.playingAs;
             gameBoard.populateBoard();
             checkWin(playingGame);
@@ -144,14 +156,19 @@ const gameLogic = (() => {
                 takeTurn(computerTurn());
             }
         } else {
+            turnsTaken++;
             gameBoard.boardValues[targetCell.dataset.index] = turn.playingAs;
             gameBoard.populateBoard();
             checkWin(playingGame);
             turn = players.player1;
         }
+        console.log(turnsTaken)
     };
 
     playAgain.addEventListener('click', () => {
+        playAgain.classList.add('hidden');
+        playAgain.classList.remove('bottomVisible');
+        turnsTaken = 0;
         playingGame = true;
         for(let i = 0; i < 9; i++) {
             gameBoard.boardValues[i] = '';
