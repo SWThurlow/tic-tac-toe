@@ -51,6 +51,8 @@ const players = (() => {
     //Setting up players.
     let player1 = playerFactory('', 'o');
     let player2 = playerFactory('', 'x');
+    const player1Container = document.querySelector('.playerOne');
+    const player2Container = document.querySelector('.playerTwo');
     const player1Title = document.querySelector('.playerOneTitle');
     const player2Title = document.querySelector('.playerTwoTitle');
     startGame.addEventListener('click', () => {
@@ -83,6 +85,10 @@ const players = (() => {
         }
         winCounters.player1.textContent = 'Wins: 0';
         winCounters.player2.textContent = 'Wins: 0';
+        player1Container.classList.remove('hidden');
+        player1Container.classList.add('visible');
+        player2Container.classList.remove('hidden');
+        player2Container.classList.add('visible');
     });
     return {player1, player2}
 })();
