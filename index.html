@@ -2,26 +2,31 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Tic-Tac-Toe</title>
+        <title>Noughts and Crosses</title>
         <link rel="stylesheet" href="resetstyle.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>Tic-Tac-Toe</h1>
+        <h1>Noughts<br>and<br>Crosses</h1>
 
         <section class="gameContainer">
-          <div class="gameType topVisible">
-            <button data-type="vsComputer">Vs. Computer</button>
-            <button data-type="twoPlayer">Two Player</button>
+          <section class="top">
+            <div class="gameType visible">
+              <button data-type="vsComputer">Vs. Computer</button>
+              <button data-type="twoPlayer">Two Player</button>
+            </div>
+            <div class="playerInput hidden">
+              <label for="player1Input">Player 1:</label><input type="text" name="player1input" id="player1input">
+            </div>
+            <div class="playerInput hidden">
+              <label for="player2Input">Player 2:</label><input type="text" name="player2input" id="player2input">
+            </div>
+            <button class="startGame hidden">Start Game</button>
+          </section>
+          <div class="PlayerOne">
+            <h2 class="playerOneTitle"></h2>
+            <p class="playerOneWins score"></p>
           </div>
-          <div class="playerInput hidden">
-            <label for="player1Input">Player 1:</label><input type="text" name="player1input" id="player1input">
-          </div>
-          <div class="playerInput hidden">
-            <label for="player2Input">Player 2:</label><input type="text" name="player2input" id="player2input">
-          </div>
-          <button class="startGame hidden">Start Game</button>
-          <p class="playerOne"></p>
           <table>
               <tr>
                 <td data-index="0"></td>
@@ -39,11 +44,14 @@
                 <td data-index="8"></td>
               </tr>
           </table>
-          <p class="playerTwo"></p>
-
-          <p class="endGameMsg hidden"></p>
-
-          <button class="playAgain hidden">Play Again?</button>
+          <div class="PlayerTwo">
+            <h2 class="playerTwoTitle"></h2>
+            <p class="playerTwoWins score"></p>
+          </div>
+          <section class="bottom">
+            <p class="endGameMsg hidden"></p>
+            <button class="playAgain hidden">Play Again?</button>
+          </section>
         </section>
 
     </body>
