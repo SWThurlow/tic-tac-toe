@@ -31,6 +31,7 @@ const toggleVisibility = (() => {
 const players = (() => {
     const gameChoice = document.querySelector('.gameType');
     const textInputs = document.querySelectorAll('.playerInput');
+    const player1label = document.getElementById('player1label')
     const player1Input = document.getElementById('player1input');
     const player2Input = document.getElementById('player2input');
     const startGame =  document.querySelector('.startGame');
@@ -42,6 +43,7 @@ const players = (() => {
         if(e.target.dataset.type === 'vsComputer'){
             //Setting game type.
             gameType = 'vsComputer';
+            player1label.textContent = 'Player Name:'
             //Adding/removing classes for animation.
             toggleVisibility.hide(gameChoice);
             setTimeout(() => {

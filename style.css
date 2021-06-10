@@ -15,6 +15,7 @@ h1 {
 /*All the parts to do with the game.*/
 .gameContainer {
     width: fit-content;
+    width: -moz-fit-content;
     margin: 0 auto;
     display: grid;
     grid-template-areas: "theTop theTop theTop"
@@ -43,11 +44,13 @@ button {
 
 .gameType {
     width: fit-content;
+    width: -moz-fit-content;
     margin: 0 auto;
 }
 
 .playerInput {
     width: fit-content;
+    width: -moz-fit-content;
     margin: 10px auto;
 }
 
