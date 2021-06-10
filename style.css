@@ -156,11 +156,11 @@ td {
 }
 
 .fadeOut {
-    animation: fadeOut 2s;
-    -webkit-animation: fadeOut 2s;
-    -moz-animation: fadeOut 2s;
-    -o-animation: fadeOut 2s;
-    -ms-animation: fadeOut 2s;
+    animation: fadeOut 1s;
+    -webkit-animation: fadeOut 1s;
+    -moz-animation: fadeOut 1s;
+    -o-animation: fadeOut 1s;
+    -ms-animation: fadeOut 1s;
 }
 
 .visible {

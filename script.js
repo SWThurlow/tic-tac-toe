@@ -10,6 +10,24 @@ const winCounters = (() => {
     return {player1, player2}
 })();
 
+const toggleVisibility = (() => {
+    function hide(target) {
+        target.classList.remove('visible');
+        target.classList.add('fadeOut');
+        setTimeout(() => {
+            target.classList.remove('fadeOut');
+            target.classList.add('hidden');
+        }, 1000);
+    }
+
+    function reveal(target){
+        target.classList.remove('hidden');
+        target.classList.add('visible');
+    }
+
+    return {hide, reveal};
+})();
+
 const players = (() => {
     const gameChoice = document.querySelector('.gameType');
     const textInputs = document.querySelectorAll('.playerInput');
@@ -25,24 +43,21 @@ const players = (() => {
             //Setting game type.
             gameType = 'vsComputer';
             //Adding/removing classes for animation.
-            gameChoice.classList.add('hidden');
-            gameChoice.classList.remove('visible');
-            textInputs[0].classList.remove('hidden');
-            textInputs[0].classList.add('visible');
-            startGame.classList.remove('hidden');
-            startGame.classList.add('visible');           
+            toggleVisibility.hide(gameChoice);
+            setTimeout(() => {
+                toggleVisibility.reveal(textInputs[0]);
+                toggleVisibility.reveal(startGame);
+            }, 1000);          
         } else if(e.target.dataset.type === 'twoPlayer'){
             //Setting game type.
             gameType = 'twoPlayer';
             //Adding/removing classes for animation.
-            gameChoice.classList.add('hidden');
-            gameChoice.classList.remove('visible');
-            textInputs.forEach(input => {
-                input.classList.remove('hidden');
-                input.classList.add('visible');
-            });
-            startGame.classList.remove('hidden');
-            startGame.classList.add('visible');
+            toggleVisibility.hide(gameChoice);
+            setTimeout(() => {
+                toggleVisibility.reveal(textInputs[0]);
+                toggleVisibility.reveal(textInputs[1]);
+                toggleVisibility.reveal(startGame);
+            }, 1000);
         }
         
 
@@ -64,12 +79,9 @@ const players = (() => {
             player2Title.textContent = player2Input.value;
 
             //Changing classes to hide user inputs while playing.
-            textInputs.forEach(input => {
-                input.classList.add('hidden');
-                input.classList.remove('visible');
-            });
-            startGame.classList.add('hidden');
-            startGame.classList.remove('visible');
+            toggleVisibility.hide(textInputs[0]);
+            toggleVisibility.hide(textInputs[1]);
+            toggleVisibility.hide(startGame);
         } else if (gameType === 'vsComputer'){
             if(player1Input.value === '') return;
             player1.name = player1Input.value;
@@ -78,17 +90,13 @@ const players = (() => {
             player2Title.textContent = 'Computer';
 
             //Changing classes to hide user inputs while playing.
-            textInputs[0].classList.add('hidden');
-            textInputs[0].classList.remove('visible');
-            startGame.classList.add('hidden');
-            startGame.classList.remove('visible');
+            toggleVisibility.hide(textInputs[0]);
+            toggleVisibility.hide(startGame);
         }
         winCounters.player1.textContent = 'Wins: 0';
         winCounters.player2.textContent = 'Wins: 0';
-        player1Container.classList.remove('hidden');
-        player1Container.classList.add('visible');
-        player2Container.classList.remove('hidden');
-        player2Container.classList.add('visible');
+        toggleVisibility.reveal(player1Container);
+        toggleVisibility.reveal(player2Container);
     });
     return {player1, player2}
 })();
@@ -138,10 +146,8 @@ const gameLogic = (() => {
             turn.wins++
             endMsg.textContent = `${turn.name} Wins!`;
             playingGame = false;
-            playAgain.classList.remove('hidden');
-            playAgain.classList.add('visible');
-            endMsg.classList.remove('hidden');
-            endMsg.classList.add('visible');
+            toggleVisibility.reveal(playAgain);
+            toggleVisibility.reveal(endMsg);
             if(turn === players.player1) {
                 winCounters.player1.textContent = `Wins: ${turn.wins}`;
             } else {
@@ -150,11 +156,9 @@ const gameLogic = (() => {
         } 
         if(turnsTaken === 9 && checkX === false && checkO === false){
             endMsg.textContent = `It's a draw.`;
-            endMsg.classList.remove('hidden');
-            endMsg.classList.add('visible');
+            toggleVisibility.reveal(endMsg);
             playingGame = false;
-            playAgain.classList.remove('hidden');
-            playAgain.classList.add('visible');
+            toggleVisibility.reveal(playAgain);
         };
     }    
     
@@ -193,8 +197,7 @@ const gameLogic = (() => {
     };
 
     playAgain.addEventListener('click', () => {
-        playAgain.classList.add('hidden');
-        playAgain.classList.remove('visible');
+        toggleVisibility.hide(playAgain);
         turnsTaken = 0;
         playingGame = true;
         for(let i = 0; i < 9; i++) {
@@ -204,8 +207,7 @@ const gameLogic = (() => {
         if(turn.name === 'Computer') {
                 takeTurn(computerTurn());
         }
-        endMsg.classList.remove('visible');
-        endMsg.classList.add('hidden');
+        toggleVisibility.hide(endMsg);
     });
 
     window.addEventListener('click', (e) => {
